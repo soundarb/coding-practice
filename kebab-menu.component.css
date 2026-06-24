@@ -1,0 +1,72 @@
+.kebab {
+  position: relative;
+  display: inline-flex;
+}
+
+.kebab__trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: #5f6368;
+  cursor: pointer;
+  transition: background-color 0.12s ease;
+}
+
+.kebab__trigger:hover,
+.kebab__trigger.is-open {
+  background: #eceef1;
+}
+
+.kebab__trigger:focus-visible {
+  outline: 2px solid #1a73e8;
+  outline-offset: 1px;
+}
+
+.kebab__menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  z-index: 30;
+  min-width: 168px;
+  padding: 6px;
+  background: #fff;
+  border: 1px solid #e3e5e8;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.14);
+}
+
+.kebab__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 9px 12px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  font: inherit;
+  font-size: 14px;
+  color: #1f2329;
+  text-align: left;
+  cursor: pointer;
+}
+
+.kebab__item:hover {
+  background: #f3f4f6;
+}
+
+.kebab__item:focus-visible {
+  outline: 2px solid #1a73e8;
+  outline-offset: -2px;
+}
+
+.kebab__item svg {
+  flex: 0 0 auto;
+  color: #5f6368;
+}
