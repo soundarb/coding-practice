@@ -1,0 +1,32 @@
+.add-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid #c7cace;
+  border-radius: 50%;
+  background: #fff;
+  color: #3c4043;
+  cursor: pointer;
+  transition: background-color 0.12s ease, border-color 0.12s ease, color 0.12s ease;
+}
+
+.add-btn:hover {
+  background: #f1f3f4;
+  border-color: #1a73e8;
+  color: #1a73e8;
+}
+
+.add-btn:focus-visible {
+  outline: 2px solid #1a73e8;
+  outline-offset: 2px;
+}
+
+.add-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  border-color: #c7cace;
+  background: #fff;
+  color: #3c4043;
+}

@@ -1,0 +1,161 @@
+:host {
+  --ef-border: #c9ccd2;
+  --ef-border-focus: #8a8f98;
+  --ef-bg: #ffffff;
+  --ef-text: #1f2329;
+  --ef-muted: #6b7280;
+  --ef-hover: #f2f4f7;
+  --ef-radius: 6px;
+  --ef-height: 38px;
+
+  display: inline-block;
+}
+
+.entity-filter {
+  position: relative;
+  font-size: 14px;
+  color: var(--ef-text);
+}
+
+/* Dropdown + textbox sit side by side */
+.control {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+}
+
+/* ---- Scope dropdown ---- */
+.select-wrap {
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.mode-select {
+  height: var(--ef-height);
+  min-width: 130px;
+  padding: 0 28px 0 12px;
+  border: 1px solid var(--ef-border);
+  border-radius: var(--ef-radius);
+  background: var(--ef-bg);
+  color: var(--ef-text);
+  font: inherit;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+
+  /* native-style up/down chevrons on the right edge */
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--ef-muted) 50%),
+    linear-gradient(135deg, var(--ef-muted) 50%, transparent 50%);
+  background-position:
+    right 13px center,
+    right 9px center;
+  background-size: 4px 4px, 4px 4px;
+  background-repeat: no-repeat;
+}
+
+.mode-select:focus {
+  outline: none;
+  border-color: var(--ef-border-focus);
+}
+
+/* ---- Textbox ---- */
+.input-wrap {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 260px;
+}
+
+.query-input {
+  width: 100%;
+  height: var(--ef-height);
+  padding: 0 32px 0 12px;
+  border: 1px solid var(--ef-border);
+  border-radius: var(--ef-radius);
+  background: var(--ef-bg);
+  color: var(--ef-text);
+  font: inherit;
+  box-sizing: border-box;
+}
+
+.query-input::placeholder {
+  color: var(--ef-muted);
+}
+
+.query-input:focus {
+  outline: none;
+  border-color: var(--ef-border-focus);
+}
+
+.clear-btn {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--ef-muted);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.clear-btn:hover {
+  background: var(--ef-hover);
+  color: var(--ef-text);
+}
+
+/* ---- Suggestions ---- */
+.suggestions {
+  position: absolute;
+  top: calc(var(--ef-height) + 4px);
+  right: 0;
+  left: 138px; /* align under the textbox, past the dropdown */
+  z-index: 20;
+  max-height: 320px;
+  overflow-y: auto;
+  background: var(--ef-bg);
+  border: 1px solid var(--ef-border);
+  border-radius: var(--ef-radius);
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.12);
+  padding: 4px 0;
+}
+
+.suggestion {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  width: 100%;
+  padding: 9px 16px;
+  border: none;
+  background: transparent;
+  color: var(--ef-text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.suggestion:hover,
+.suggestion.active {
+  background: var(--ef-hover);
+}
+
+.suggestion-id {
+  font-variant-numeric: tabular-nums;
+}
+
+.suggestion-sep {
+  color: var(--ef-muted);
+}
+
+.suggestion-empty {
+  padding: 12px 16px;
+  color: var(--ef-muted);
+}

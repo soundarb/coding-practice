@@ -1,0 +1,72 @@
+<div class="entity-filter">
+  <div class="control">
+    <!-- Scope dropdown: Organization / Skill Group -->
+    <div class="select-wrap">
+      <select
+        class="mode-select"
+        [value]="mode()"
+        (change)="onModeChange($any($event.target).value)"
+        aria-label="Filter scope"
+      >
+        <option value="organization">Organization</option>
+        <option value="skillGroup">Skill Group</option>
+      </select>
+    </div>
+
+    <!-- Autocomplete textbox -->
+    <div class="input-wrap">
+      <input
+        #queryInput
+        type="text"
+        class="query-input"
+        role="combobox"
+        autocomplete="off"
+        aria-autocomplete="list"
+        [attr.aria-expanded]="open()"
+        [value]="query()"
+        [placeholder]="placeholder()"
+        (focus)="onFocus()"
+        (input)="onInput($any($event.target).value)"
+        (keydown)="onKeydown($event)"
+      />
+
+      @if (showClear()) {
+        <button
+          type="button"
+          class="clear-btn"
+          aria-label="Clear filter"
+          (click)="clear()"
+        >
+          &times;
+        </button>
+      }
+    </div>
+  </div>
+
+  <!-- Suggestions -->
+  @if (open()) {
+    <div class="suggestions" role="listbox">
+      @if (loading()) {
+        <div class="suggestion-empty">Loading…</div>
+      } @else if (filtered().length === 0) {
+        <div class="suggestion-empty">No matches</div>
+      } @else {
+        @for (opt of filtered(); track opt.id; let i = $index) {
+          <button
+            type="button"
+            class="suggestion"
+            role="option"
+            [class.active]="i === activeIndex()"
+            [attr.aria-selected]="i === activeIndex()"
+            (click)="select(opt)"
+            (mouseenter)="activeIndex.set(i)"
+          >
+            <span class="suggestion-id">{{ opt.id }}</span>
+            <span class="suggestion-sep">&ndash;</span>
+            <span class="suggestion-label">{{ opt.label }}</span>
+          </button>
+        }
+      }
+    </div>
+  }
+</div>
