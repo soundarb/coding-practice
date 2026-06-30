@@ -105,10 +105,21 @@
 
 .mode-check {
   display: inline-flex;
+  align-items: center;
   justify-content: center;
-  flex: 0 0 16px;
-  width: 16px;
+  flex: 0 0 18px;
+  width: 18px;
   color: var(--ef-text);
+}
+
+.mode-check-icon {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 /* ---- Textbox ---- */
