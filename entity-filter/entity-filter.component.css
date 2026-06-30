@@ -7,6 +7,7 @@
   --ef-hover: #f2f4f7;
   --ef-radius: 6px;
   --ef-height: 38px;
+  --ef-select-w: 132px;
 
   display: inline-block;
 }
@@ -17,11 +18,18 @@
   color: var(--ef-text);
 }
 
-/* Dropdown + textbox sit side by side */
+/* Dropdown + textbox read as one joined control */
 .control {
   display: flex;
   align-items: stretch;
-  gap: 8px;
+  border: 1px solid var(--ef-border);
+  border-radius: var(--ef-radius);
+  background: var(--ef-bg);
+  overflow: hidden;
+}
+
+.control:focus-within {
+  border-color: var(--ef-border-focus);
 }
 
 /* ---- Scope dropdown ---- */
@@ -32,31 +40,27 @@
 
 .mode-select {
   height: var(--ef-height);
-  min-width: 130px;
-  padding: 0 28px 0 12px;
-  border: 1px solid var(--ef-border);
-  border-radius: var(--ef-radius);
-  background: var(--ef-bg);
+  width: var(--ef-select-w);
+  padding: 0 26px 0 12px;
+  border: none;
+  border-right: 1px solid var(--ef-border);
+  border-radius: 0;
+  background-color: var(--ef-bg);
   color: var(--ef-text);
   font: inherit;
   cursor: pointer;
   appearance: none;
   -webkit-appearance: none;
 
-  /* native-style up/down chevrons on the right edge */
-  background-image:
-    linear-gradient(45deg, transparent 50%, var(--ef-muted) 50%),
-    linear-gradient(135deg, var(--ef-muted) 50%, transparent 50%);
-  background-position:
-    right 13px center,
-    right 9px center;
-  background-size: 4px 4px, 4px 4px;
+  /* native-style up/down double arrow on the right edge */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='14'%3E%3Cpath d='M1 5L9 5L5 1Z' fill='%236b7280'/%3E%3Cpath d='M1 9L9 9L5 13Z' fill='%236b7280'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
+  background-position: right 9px center;
+  background-size: 9px 13px;
 }
 
 .mode-select:focus {
   outline: none;
-  border-color: var(--ef-border-focus);
 }
 
 /* ---- Textbox ---- */
@@ -70,8 +74,8 @@
   width: 100%;
   height: var(--ef-height);
   padding: 0 32px 0 12px;
-  border: 1px solid var(--ef-border);
-  border-radius: var(--ef-radius);
+  border: none;
+  border-radius: 0;
   background: var(--ef-bg);
   color: var(--ef-text);
   font: inherit;
@@ -84,7 +88,6 @@
 
 .query-input:focus {
   outline: none;
-  border-color: var(--ef-border-focus);
 }
 
 .clear-btn {
@@ -117,7 +120,7 @@
   position: absolute;
   top: calc(var(--ef-height) + 4px);
   right: 0;
-  left: 138px; /* align under the textbox, past the dropdown */
+  left: var(--ef-select-w); /* align under the textbox, past the dropdown */
   z-index: 20;
   max-height: 320px;
   overflow-y: auto;
