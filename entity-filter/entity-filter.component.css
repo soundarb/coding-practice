@@ -32,13 +32,15 @@
   border-color: var(--ef-border-focus);
 }
 
-/* ---- Scope dropdown ---- */
+/* ---- Scope dropdown trigger ---- */
 .select-wrap {
   position: relative;
   flex: 0 0 auto;
 }
 
-.mode-select {
+.mode-trigger {
+  display: flex;
+  align-items: center;
   height: var(--ef-height);
   width: var(--ef-select-w);
   padding: 0 26px 0 12px;
@@ -48,9 +50,8 @@
   background-color: var(--ef-bg);
   color: var(--ef-text);
   font: inherit;
+  text-align: left;
   cursor: pointer;
-  appearance: none;
-  -webkit-appearance: none;
 
   /* native-style up/down double arrow on the right edge */
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='14'%3E%3Cpath d='M1 5L9 5L5 1Z' fill='%236b7280'/%3E%3Cpath d='M1 9L9 9L5 13Z' fill='%236b7280'/%3E%3C/svg%3E");
@@ -59,8 +60,55 @@
   background-size: 9px 13px;
 }
 
-.mode-select:focus {
+.mode-trigger:focus {
   outline: none;
+}
+
+.mode-trigger-label {
+  flex: 1 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---- Scope menu (tick mark on selected, no full-row grey) ---- */
+.mode-menu {
+  position: absolute;
+  top: calc(var(--ef-height) + 4px);
+  left: 0;
+  z-index: 30;
+  min-width: 180px;
+  background: var(--ef-bg);
+  border: 1px solid var(--ef-border);
+  border-radius: var(--ef-radius);
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.12);
+  padding: 4px 0;
+}
+
+.mode-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 9px 14px;
+  border: none;
+  background: transparent;
+  color: var(--ef-text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.mode-option:hover {
+  background: var(--ef-hover);
+}
+
+.mode-check {
+  display: inline-flex;
+  justify-content: center;
+  flex: 0 0 16px;
+  width: 16px;
+  color: var(--ef-text);
 }
 
 /* ---- Textbox ---- */

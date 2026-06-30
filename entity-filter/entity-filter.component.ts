@@ -40,11 +40,16 @@ export class EntityFilterComponent {
   readonly selected = signal<LookupOption | null>(null);
   readonly loading = signal(false);
   readonly open = signal(false);
+  readonly modeMenuOpen = signal(false);
   readonly activeIndex = signal(-1);
 
   /** Full list returned by the API, cached per mode. */
   private readonly options = signal<LookupOption[]>([]);
   private fetchedMode: LookupType | null = null;
+
+  readonly modeLabel = computed(() =>
+    this.mode() === 'organization' ? 'Organization' : 'Skill Group'
+  );
 
   readonly placeholder = computed(() =>
     this.mode() === 'organization'
@@ -67,9 +72,17 @@ export class EntityFilterComponent {
 
   readonly showClear = computed(() => !!this.query() || !!this.selected());
 
-  // ---- Dropdown (Organization / Skill Group) ------------------------------
-  onModeChange(value: string): void {
-    const mode = value as LookupType;
+  // ---- Scope dropdown (custom menu with tick marks) -----------------------
+  toggleModeMenu(): void {
+    this.modeMenuOpen.update((v) => !v);
+    this.open.set(false);
+  }
+
+  selectMode(mode: LookupType): void {
+    this.modeMenuOpen.set(false);
+    if (mode === this.mode()) {
+      return;
+    }
     this.mode.set(mode);
     // Switching scope invalidates any current pick and the cached list.
     this.query.set('');
@@ -84,6 +97,7 @@ export class EntityFilterComponent {
   // ---- Textbox ------------------------------------------------------------
   /** On focus, fetch the list for the current mode (once per mode). */
   onFocus(): void {
+    this.modeMenuOpen.set(false);
     this.open.set(true);
     if (this.fetchedMode !== this.mode()) {
       this.fetch();
@@ -168,6 +182,7 @@ export class EntityFilterComponent {
   onDocumentClick(event: MouseEvent): void {
     if (!this.host.nativeElement.contains(event.target as Node)) {
       this.open.set(false);
+      this.modeMenuOpen.set(false);
     }
   }
 }

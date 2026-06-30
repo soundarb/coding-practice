@@ -1,16 +1,16 @@
 <div class="entity-filter">
   <div class="control">
-    <!-- Scope dropdown: Organization / Skill Group -->
+    <!-- Scope dropdown: custom menu so the selected item shows a tick -->
     <div class="select-wrap">
-      <select
-        class="mode-select"
-        [value]="mode()"
-        (change)="onModeChange($any($event.target).value)"
-        aria-label="Filter scope"
+      <button
+        type="button"
+        class="mode-trigger"
+        aria-haspopup="listbox"
+        [attr.aria-expanded]="modeMenuOpen()"
+        (click)="toggleModeMenu()"
       >
-        <option value="organization">Organization</option>
-        <option value="skillGroup">Skill Group</option>
-      </select>
+        <span class="mode-trigger-label">{{ modeLabel() }}</span>
+      </button>
     </div>
 
     <!-- Autocomplete textbox -->
@@ -42,6 +42,41 @@
       }
     </div>
   </div>
+
+  <!-- Scope menu -->
+  @if (modeMenuOpen()) {
+    <div class="mode-menu" role="listbox">
+      <button
+        type="button"
+        class="mode-option"
+        role="option"
+        [attr.aria-selected]="mode() === 'organization'"
+        (click)="selectMode('organization')"
+      >
+        <span class="mode-check">
+          @if (mode() === 'organization') {
+            <span aria-hidden="true">&#10003;</span>
+          }
+        </span>
+        <span>Organization</span>
+      </button>
+
+      <button
+        type="button"
+        class="mode-option"
+        role="option"
+        [attr.aria-selected]="mode() === 'skillGroup'"
+        (click)="selectMode('skillGroup')"
+      >
+        <span class="mode-check">
+          @if (mode() === 'skillGroup') {
+            <span aria-hidden="true">&#10003;</span>
+          }
+        </span>
+        <span>Skill Group</span>
+      </button>
+    </div>
+  }
 
   <!-- Suggestions -->
   @if (open()) {
